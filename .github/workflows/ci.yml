@@ -55,7 +55,7 @@ jobs:
       - name: API tests
         uses: erikbos/karate-action@main
         with:
-          url: http://localhost:5000/api/login
+          authurl: http://localhost:5000/api/login
           tests: |
             src/test/java/karate/auth/authentication.feature
             src/test/java/karate/auth/chargestation.feature
