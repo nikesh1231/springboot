@@ -1,0 +1,42 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+    <persistence-unit name="ocpp1">
+        <provider>org.hibernate.reactive.provider.ReactivePersistenceProvider</provider>
+		<class>com.evbackend.model.Token</class>
+        <class>com.evbackend.model.users.User</class>
+        <class>com.evbackend.model.users.UserRole</class>
+        <class>com.evbackend.model.address.Address</class>
+		<class>com.evbackend.model.chargestation.ChargeStation</class>
+        <class>com.evbackend.model.chargestation.ChargeSite</class>
+        <class>com.evbackend.model.chargestation.Review</class>
+        <class>com.evbackend.model.chargestation.ConnectorType</class>
+        <class>com.evbackend.model.vehicle.Vehicle</class>
+        <class>com.evbackend.model.vehicle.VehicleManufacturer</class>
+        <class>com.evbackend.model.vehicle.VehicleModel</class>
+        <class>com.evbackend.model.vehicle.VehicleVersion</class>
+        <class>com.evbackend.model.FavoriteChargeStation</class>
+        <properties>
+
+
+
+            <!-- The Vert.x SQL Client connection pool size -->
+            <property name="hibernate.connection.pool_size"
+                      value="10"/>
+
+            <!-- Automatic schema export -->
+            <property name="javax.persistence.schema-generation.database.action"
+                      value="drop-and-create"/>
+
+            <!-- SQL statement logging -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
