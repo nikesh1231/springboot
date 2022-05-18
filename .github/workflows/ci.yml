@@ -25,7 +25,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build 
-        run: mvn clean install
+        run: mvn -B package --file pom.xml
+      
+    
 
       ##- name: Mysql server
       ##  uses: actions/checkout@v3
