@@ -42,11 +42,11 @@ jobs:
           mysql user: 'developer' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
           mysql password: ${{ secrets.DatabasePassword }}
           options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-          
+
       - name: Verify MySQL connection from host
         run: |
           sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port 32574 -uroot -ppassword -e "SHOW DATABASES"
+          mysql --host 127.0.0.1 --port 3800 -uroot -ppassword -e "SHOW DATABASES"
       ##- name: Build and analyze
       ##  env:
       ##    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
