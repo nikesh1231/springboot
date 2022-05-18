@@ -46,7 +46,7 @@ jobs:
       - name: Verify MySQL connection from host
         run: |
           sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port 3800 -uroot -ppassword -e "SHOW DATABASES"
+          mysql --host 127.0.0.1 --port 3800 -uroot -p${{ secrets.RootPassword }} -e "SHOW DATABASES"
       ##- name: Build and analyze
       ##  env:
       ##    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
