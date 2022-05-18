@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
     
       - name: Set up JDK
         uses: actions/setup-java@v1
@@ -25,7 +25,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build 
-        run: mvn -B test
+        run: mvn clean install
 
       ##- name: Mysql server
       ##  uses: actions/checkout@v3
