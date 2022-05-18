@@ -2,7 +2,7 @@ name: JAVA SPRING BOOT APPLICATION CI/CD Pipeline
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   Build:
