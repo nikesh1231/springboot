@@ -48,10 +48,17 @@ jobs:
       ##  run: |
       ##    sudo apt-get install -y mysql-client
       ##    mysql --host 127.0.0.1 --port 3800 -uroot -p${{ secrets.RootPassword }} -e "SHOW DATABASES"
-      - name: test execution
-        run: |
-          mvn test -Dtest=HealthRunner
-          mvn test -Dtest=ChargeStationRunner
+      ##- name: test execution
+      ##  run: |
+      ##    mvn test -Dtest=HealthRunner
+      ##    mvn test -Dtest=ChargeStationRunner
+      - name: API tests
+        uses: erikbos/karate-action@main
+        with:
+          url: http://localhost:5000/api/login
+          tests: |
+            src/test/java/karate/auth/authentication.feature
+            src/test/java/karate/auth/chargestation.feature
 
       - name: Karate DSL Test Reports
         uses: actions/upload-artifact@v2
