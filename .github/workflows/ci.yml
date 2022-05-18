@@ -9,6 +9,7 @@ env:
 jobs:
   Build:
     name: Spring boot application Build
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,7 +28,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build 
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml ##mvn clean build
 
       - name: MySql Server
         uses: mirromutth/mysql-action@v1.1
@@ -43,10 +44,22 @@ jobs:
           mysql password: ${{ secrets.DatabasePassword }}
           options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-      - name: Verify MySQL connection from host
+      ##- name: Verify MySQL connection from host
+      ##  run: |
+      ##    sudo apt-get install -y mysql-client
+      ##    mysql --host 127.0.0.1 --port 3800 -uroot -p${{ secrets.RootPassword }} -e "SHOW DATABASES"
+      - name: test execution
         run: |
-          sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port 3800 -uroot -p${{ secrets.RootPassword }} -e "SHOW DATABASES"
+          mvn test -Dtest=HealthRunner
+          mvn test -Dtest=ChargeStationRunner
+
+      - name: Karate DSL Test Reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Reports
+          path: | 
+            ./target/karate-reports/
+            ./target/karate.log
       ##- name: Build and analyze
       ##  env:
       ##    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
