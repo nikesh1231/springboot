@@ -30,6 +30,9 @@ jobs:
       - name: Build 
         run: mvn -B package --file pom.xml ##mvn clean build
 
+      - name: Start test app
+        run: java -Dfile.encoding=UTF-8 -jar ${{github.workspace}}/target/evbackend-0.0.1-SNAPSHOT.jar
+
       - name: MySql Server
         uses: mirromutth/mysql-action@v1.1
         with:
